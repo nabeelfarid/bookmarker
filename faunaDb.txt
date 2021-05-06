@@ -1,0 +1,27 @@
+//seed data 
+
+Map(
+  [
+    { url: "https://www.google.com", description: "a search engine" },
+    { url: "https://www.bbc.com", description: "a news website" },
+    { url: "https://www.wikipedia.org/", description: "an encylopedia" }
+  ],
+  Lambda("bookmark",
+    Create(Collection("Bookmark"), { data: Var("bookmark") })
+  )
+);
+
+//Get all bookmarks
+
+Map(
+  Paginate(Match(Index("allBookmarks"))),
+  Lambda("X", Get(Var("X")))
+);
+
+// GraphQL Endpoints
+help: https://fauna.com/blog/try-faunadbs-graphql-api
+Playground: https://www.graphqlbin.com/v2/new
+Fauna db Endpoint: https://graphql.fauna.com/graphql
+{ 
+    "Authorization": "Bearer XXXX"
+}
