@@ -29,16 +29,13 @@ module.exports = {
       },
     },
     {
-      resolve: "gatsby-source-graphql",
+      resolve: `gatsby-source-faunadb`,
       options: {
-        // Arbitrary name for the remote schema Query type
-        typeName: "FaunaBookmarksDb",
-        // Field under which the remote schema will be accessible. You'll use this in your Gatsby query
-        fieldName: "fauna",
-        url: "https://graphql.fauna.com/graphql",
-        headers: {
-          Authorization: "Bearer fnAEIjPQPhACCVLvJehGIk9x3a13Tn9g_iYYvQGl",
-        },
+        secret: process.env.FAUNADB_SERVER_KEY,
+        index: `allBookmarks`,
+        // This is the name under which your data will appear in Gatsby GraphQL queries
+        // The following will create queries called `allBookmark` and `bookmark`.
+        type: "bookmark",
       },
     },
   ],

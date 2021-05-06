@@ -17,11 +17,3 @@ Map(
   Paginate(Match(Index("allBookmarks"))),
   Lambda("X", Get(Var("X")))
 );
-
-// GraphQL Endpoints
-help: https://fauna.com/blog/try-faunadbs-graphql-api
-Playground: https://www.graphqlbin.com/v2/new
-Fauna db Endpoint: https://graphql.fauna.com/graphql
-{ 
-    "Authorization": "Bearer XXXX"
-}

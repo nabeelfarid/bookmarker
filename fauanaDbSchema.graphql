@@ -1,8 +1,0 @@
-type Bookmark {
-  url: String!
-  description: String!
-}
-
-type Query {
-  allBookmarks: [Bookmark!]!
-}
