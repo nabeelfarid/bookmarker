@@ -17,3 +17,33 @@ Map(
   Paginate(Match(Index("allBookmarks"))),
   Lambda("X", Get(Var("X")))
 );
+
+// Create Index
+
+//only return ref when creatig index when using gatsby-source-faunadb plugin 
+CreateIndex({
+  name: "bookmarks_sort_by_ref_desc",
+  source: Collection("Bookmark"),
+  values: [
+    { field: ["ref"], reverse: true }
+  ]
+})
+
+//Because the plugin uses Let and Map functions to return all values based on ref returned by index
+Let(
+  { result: Match(Index("bookmarks_sort_by_ref_desc")) },
+  Map(Select("data", Paginate(Var("result"))), Lambda("ref", Get(Var("ref"))))
+);
+
+//You will get errors if you try to return extra data values as follows in the index
+CreateIndex({
+  name: "bookmarksAllData_sort_by_ref_desc",
+  source: Collection("Bookmark"),
+  values: [
+    { field: ["ref"], reverse: true  },
+    { field: ["data", "url"]},
+    { field: ["data", "title"]},
+    { field: ["data", "description"]}
+    
+  ]
+})

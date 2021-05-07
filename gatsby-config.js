@@ -5,7 +5,6 @@ require("dotenv").config({
 module.exports = {
   flags: {
     FAST_DEV: true,
-    FAST_REFRESH: true,
   },
   siteMetadata: {
     title: `Bookmarker`,
@@ -32,7 +31,7 @@ module.exports = {
       resolve: `gatsby-source-faunadb`,
       options: {
         secret: process.env.FAUNADB_SERVER_KEY,
-        index: `allBookmarks`,
+        index: `bookmarks_sort_by_ref_desc`,
         // This is the name under which your data will appear in Gatsby GraphQL queries
         // The following will create queries called `allBookmark` and `bookmark`.
         type: "bookmark",

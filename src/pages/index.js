@@ -28,8 +28,12 @@ const IndexPage = (props) => {
               target="blank"
               rel="noopener"
             >
-              {edge.node.url}
+              {edge.node.title}
             </Link>
+            <Typography variant="subtitle1" display="inline">
+              {" "}
+              — {edge.node.url}
+            </Typography>
 
             <Typography variant="subtitle2">{edge.node.description}</Typography>
           </Box>
@@ -46,12 +50,29 @@ export const query = graphql`
         node {
           _id
           url
+          title
           description
         }
       }
     }
   }
 `;
+
+// graphql`
+//   query {
+//     bookmarker {
+//       allBookmarks {
+//         data {
+//           description
+//           id
+//           url
+//           title
+//           description
+//         }
+//       }
+//     }
+//   }
+// `;
 
 // graphql`
 //   query {
