@@ -3,9 +3,10 @@ require("dotenv").config({
 });
 
 module.exports = {
-  flags: {
-    FAST_DEV: true,
-  },
+  // flags: {
+  //   FAST_DEV: true,
+  //   PRESERVE_WEBPACK_CACHE: true,
+  // },
   siteMetadata: {
     title: `Bookmarker`,
     description: `Bookmarking App created with Gatsby, Graphql, Fauna DB and Netlify`,

@@ -3,6 +3,12 @@ const axios = require("axios");
 
 const handler = async (event) => {
   try {
+    // return {
+    //   statusCode: 200,
+    //   body: JSON.stringify({
+    //     message: `hello world`,
+    //   }),
+    // };
     // Trigger a new build to freeze this lolly forever
     const response = await axios.post(process.env.NETLIFY_BUILD_HOOK);
 

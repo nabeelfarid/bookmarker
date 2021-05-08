@@ -1,4 +1,6 @@
 const { ApolloServer, gql } = require("apollo-server-lambda");
+const rp = require("request-promise");
+const cheerio = require("cheerio");
 const faunadb = require("faunadb");
 
 const q = faunadb.query;
@@ -38,12 +40,22 @@ const resolvers = {
   },
   Mutation: {
     createBookmark: async (_, args) => {
+      //get the html doc of the url to extract title and description
+      const htmlString = await rp(args.url);
+      const doc = cheerio.load(htmlString);
+      // Get the text inside the tag
+      const title = doc("head > title").text();
+      // Get the text of the content attribute
+      const description = doc('meta[name="description"]').attr("content");
+      console.log(title, description);
+
+      //save url with title and description to database
       const result = await fdbClient.query(
         q.Create(q.Collection("Bookmark"), {
           data: {
             url: args.url,
-            title: "some title",
-            description: "some description",
+            title: title ? title : "",
+            description: description ? description : "",
           },
         })
       );

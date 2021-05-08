@@ -1,10 +1,10 @@
-import * as React from "react"
-import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
-import { Box, Container, Divider, Link, Typography } from "@material-ui/core"
-import Header from "./header"
+import * as React from "react";
+import PropTypes from "prop-types";
+import { useStaticQuery, graphql } from "gatsby";
+import { Box, Container, Divider, Link, Typography } from "@material-ui/core";
+import Header from "./header";
 
-const Layout = ({ children }) => {
+const Layout = ({ pathname, children }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -14,13 +14,14 @@ const Layout = ({ children }) => {
         }
       }
     }
-  `)
+  `);
 
   return (
     <>
       <Header
         siteTitle={data.site.siteMetadata?.title}
         repo={data.site.siteMetadata?.repo}
+        pathname={pathname}
       />
       <Container maxWidth="md">
         <Box mt={2}>
@@ -42,11 +43,11 @@ const Layout = ({ children }) => {
         </Box>
       </Container>
     </>
-  )
-}
+  );
+};
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
-}
+};
 
-export default Layout
+export default Layout;
